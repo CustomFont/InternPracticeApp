@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>1/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/4</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -92,22 +92,25 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -120,32 +123,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {useState, useEffect} from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {useContext} from 'react';
+import { ItemListContext } from '../App';
 &nbsp;
-export default function <span class="fstat-no" title="function not covered" >ToDoTable(</span>) {
+export default function ToDoTable() {
+    const itemListContext = useContext(ItemListContext)
+    const toDoItems = itemListContext.toDoItems;
 &nbsp;
-    const tableContents = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        return(</span>
-            &lt;tr&gt;
-                &lt;th&gt;id&lt;/th&gt;
-                &lt;th&gt;Task&lt;/th&gt;
-                &lt;th&gt;Start Time&lt;/th&gt;
-                &lt;th&gt;End Time&lt;/th&gt;
-            &lt;/tr&gt;
-        )
-    }
-&nbsp;
-<span class="cstat-no" title="statement not covered" >    return(</span>
+    return(
         &lt;table&gt;
             &lt;tbody&gt;
-                {tableContents()}
                 &lt;tr&gt;
-                    &lt;td&gt;0&lt;/td&gt;
-                    &lt;td&gt;task1&lt;/td&gt;
-                    &lt;td&gt;00:01&lt;/td&gt;
-                    &lt;td&gt;00:02&lt;/td&gt;
+                    &lt;th&gt;id&lt;/th&gt;
+                    &lt;th&gt;Task&lt;/th&gt;
+                    &lt;th&gt;Start Time&lt;/th&gt;
+                    &lt;th&gt;End Time&lt;/th&gt;
                 &lt;/tr&gt;
+                {toDoItems.map(<span class="fstat-no" title="function not covered" >it</span>em =&gt; {
+<span class="cstat-no" title="statement not covered" >                    return(</span>
+                        &lt;tr key={toDoItems.indexOf(item)}&gt;
+                            &lt;td&gt;{toDoItems.indexOf(item)}&lt;/td&gt;
+                            &lt;td&gt;{item.task}&lt;/td&gt;
+                            &lt;td&gt;{item.startTime}&lt;/td&gt;
+                            &lt;td&gt;{item.endTime}&lt;/td&gt;
+                        &lt;/tr&gt;
+                    )
+                })}
             &lt;/tbody&gt;
         &lt;/table&gt;
     )
@@ -157,7 +160,7 @@ export default function <span class="fstat-no" title="function not covered" >ToD
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-04-18T18:18:40.053Z
+                at 2023-04-19T19:43:07.750Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

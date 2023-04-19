@@ -2,7 +2,6 @@ import React, {useState, useContext} from 'react';
 import Modal from 'react-modal';
 import { ItemListContext } from '../App';
 
-// INSERT BUTTON HERE ----->>> <<<---------
 export default function AddItem() {
     const itemListContext = useContext(ItemListContext)
     const setToDoItems = itemListContext.setToDoItems;
@@ -11,24 +10,31 @@ export default function AddItem() {
 
     const [item, setItem] = useState({
         "task": '',
-        "startTime": '00-00-00',
-        "endTime": '00-00-00'
+        "startTime": new Date(),
+        "endTime": new Date()
     })
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const handleAddItem = (e) => {
+
+    const handleSubmit = (e) => {
         e.preventDefault();
         setToDoItems([...toDoItems, item]);
+        setModalIsOpen(false);
     }
 
     return (
         <>
-            <button onClick={() => setModalIsOpen(true)}>Add Item</button> 
-            <Modal isOpen={modalIsOpen}>
+            <button onClick={() => setModalIsOpen(true)}>Add Item</button>
+            <Modal id='task-modal' isOpen={modalIsOpen} ariaHideApp={false}>
                     <button onClick={() => setModalIsOpen(!modalIsOpen)}>x</button>
-                    <form onSubmit={handleAddItem}>
-			            <input type='text' className='nameOfItem' placeholder='Item Name' value={item.task} onChange={(e) => [setItem(item => ({...item, "task": e.target.value}))]}></input>
-                        <button type='submit'>Add</button>
+                    <form data-testid='modalForm' onSubmit={handleSubmit}>
+			            <label role='label'>Task</label>
+                        <input type='text' className='inputTask' placeholder='Item Name' value={item.task} onChange={(e) => [setItem(item => ({...item, "task": e.target.value}))]}></input>
+                        <label role='label'>Start Time</label>
+                        <input type='datetime-local' role='input' className='inputStartTime' value={item.startTime} onChange={(e) => [setItem(item => ({...item, "startTime": e.target.value}))]}></input>
+                        <label role='label'>End Time</label>
+                        <input type='datetime-local' role='input' className='inputEndTime' value={item.endTime} onChange={(e) => [setItem(item => ({...item, "endTime": e.target.value}))]}></input>
+                        <button type='submit' className='submitButton'>Add</button>
                     </form>
             </Modal>
         </>

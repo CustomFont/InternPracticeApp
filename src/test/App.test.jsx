@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import App from '../App.jsx';
+import AddItem from '../components/AddItem.jsx';
 
 describe('App tests', () => {
     beforeEach(()=>{
@@ -18,8 +19,31 @@ describe('App tests', () => {
         const button = screen.getByRole('button');
         expect(button).toBeInTheDocument() && expect(button.innerHTML).toBe('Add Item');
     });
-    // it('should open a modal when button clicked', () => {
-    //     const modal = screen.getByTestId('task-modal')
-    //     expect(modal).toBeInTheDocument();
-    // });
 });
+describe('Modal', () => {
+    beforeEach(()=>{
+        render(<AddItem />)
+        const addButton = screen.getByText('Add Item')
+        addButton.click()
+    })
+    it('should contain a button', () => {
+        const button = screen.getByText('x')
+        expect(button).toBeInTheDocument()
+    })
+    it('should contain a form', () => {
+        const form = screen.getByTestId('modalForm')
+        expect(form).toBeInTheDocument()
+    })
+    it('should contain task input field', () => {
+        const taskInput = screen.getByRole('textbox')
+        expect(taskInput).toBeInTheDocument()
+    })
+    it('should contain datetime-local fields', () => {
+        const inputFields = screen.getAllByRole('input')
+        expect(inputFields.length).toBe(2) 
+    })
+    it('should show input labels', () => {
+        const labels = screen.getAllByRole('label')
+        expect(labels.length).toBe(3)
+    })
+})
