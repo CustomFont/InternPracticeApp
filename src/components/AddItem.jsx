@@ -7,11 +7,15 @@ export default function AddItem() {
     const setToDoItems = itemListContext.setToDoItems;
     const toDoItems = itemListContext.toDoItems;
     Modal.setAppElement(document.getElementById('root'))
+    
+    // init & format placeholder dates
+    const date = new Date()
+    const newDate = `${date.getFullYear()}-${("0" + (date.getMonth() + 1)).slice(-2)}-${("0" + date.getDay()).slice(-2)}T${date.getHours()}:${("0" + date.getMinutes()).slice(-2)}`
 
     const [item, setItem] = useState({
         "task": '',
-        "startTime": new Date(),
-        "endTime": new Date()
+        "startTime": newDate,
+        "endTime": newDate
     })
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
