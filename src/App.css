@@ -1,0 +1,60 @@
+body {
+        text-align: center;
+        background-color: steelblue;
+        position: absolute;
+        left: 37vw;
+}
+tr th {
+        background: black;
+        color: white;
+      }
+
+.taskModal {
+        position: absolute;
+        top: 20vh;
+        left: 25vw;
+        right: 25vw;
+        bottom: 25vh;
+        background-color: darkturquoise;
+        padding: 2%;
+        border-style: solid;
+        border-width: 2px;
+        border-color: black;
+}
+
+.modalForm {
+        display: flex;
+        flex-direction: column;
+        padding-top: 10%;
+}
+label {
+        padding: 1vh;
+}
+
+form button {
+        max-width: fit-content;
+        align-self: center;
+}
+
+form input {
+        width: 20em;
+        align-self: center;
+}
+.xButton {
+        position: absolute;
+        left: 2.5%;
+        top: 3%;
+}
+
+.ReactModal__Overlay {
+        opacity: 0;
+        transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+        opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+        opacity: 0;
+}

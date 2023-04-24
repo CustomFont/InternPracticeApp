@@ -1,0 +1,8 @@
+services:
+
+  db:
+    image: task-database
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: password
+
