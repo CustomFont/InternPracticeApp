@@ -8,7 +8,7 @@ exports.up = function(knex) {
 		table.string('task', 255);
 		table.timestamps();
 	});
-
+}
 /**
  * @param { import("knex").Knex } knex
  * @returns { Promise<void> }

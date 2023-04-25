@@ -2,7 +2,6 @@ import React, {useState, useContext} from 'react';
 import Modal from 'react-modal';
 import { ItemListContext } from '../App';
 
-const knex = require('knex')( require('../../backend/knexfile')[process.env.NODE_ENV || 'development'])
 
 export default function AddItem() {
     const itemListContext = useContext(ItemListContext)
