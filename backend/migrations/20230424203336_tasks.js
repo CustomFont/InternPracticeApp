@@ -3,9 +3,9 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-	return knex.schema.createTable('tasklist', table => {
-		table.increments('id');
-		table.string('task', 250);
+	return knex.schema.createTable('tasklist', function(table) {
+		table.increments();
+		table.string('task', 255);
 		table.timestamps();
 	});
 

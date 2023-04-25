@@ -5,15 +5,22 @@
  */
 module.exports = {
 
-
   development: {
-    client: 'postgresql',
+    client: "pg",
+    connection: "postgres://postgres:password@127.0.0.1:5432/tasks",
+    migrations: {
+      tableName: 'knex_migrations'
+    }
+  },
+
+  staging: {
+    client: "pg",
     connection: {
-	    host: '127.0.0.1',
-	    password: 'password',
-	    user: 'postgres',
-	    port: 5432,
-	    database: 'tasks'
+      host: "127.0.0,1",
+      port: 5432,
+      database: "tasks",
+      user: "postgres",
+      password: "password",
     },
     pool: {
       min: 2,

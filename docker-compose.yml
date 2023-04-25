@@ -1,8 +1,13 @@
+version: '3'
 services:
-
   db:
-    image: task-database
-    restart: always
+    image: 'postgres:latest'
+    ports:
+      - "5432:5432"
+    volumes: 
+      - ./postgresql/data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: password
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
 
