@@ -6,6 +6,8 @@ exports.up = function(knex) {
 	return knex.schema.createTable('tasklist', function(table) {
 		table.increments();
 		table.string('task', 255);
+		table.string('starttime', 255);
+		table.string('endtime', 255);
 		table.timestamps();
 	});
 }

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/database"
 	"fmt"
 	"log"
 	"net/http"
@@ -51,14 +52,16 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 
 func setupRoutes() {
 	http.HandleFunc("/items", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Displaying test text")
+		fmt.Fprintf(w, "Displaying test tasks")
+		database := database.Tasks
+		fmt.Fprintln(w, database)
 	})
 	// mape our `/ws` endpoint to the `serveWs` function
 	http.HandleFunc("/ws", serveWs)
 }
 
 func main() {
-	fmt.Println("Task List App")
 	setupRoutes()
+	fmt.Println("Listening on port 8080")
 	http.ListenAndServe(":8080", nil)
 }
