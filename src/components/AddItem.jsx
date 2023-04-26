@@ -1,5 +1,4 @@
-
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import Modal from 'react-modal';
 import { ItemListContext } from '../App';
 
@@ -21,6 +20,16 @@ export default function AddItem() {
     })
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [dbItems, setDbItems] = useState({})
+
+	    fetch('http://localhost:8080/items')
+	        .then(function(response) {
+               return response.json() 
+            })
+            .then(function(data) {
+                console.log(data)
+            })
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
