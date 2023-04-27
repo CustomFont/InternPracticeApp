@@ -27,3 +27,8 @@
 - docker-compose up
 - npm start
     (webpack-dev-server. && cd backend go run.)
+
+- access db from terminal:
+    - docker ps -a
+    - docker exec -it <> bash
+    - psql -U postgres tasks
