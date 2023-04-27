@@ -22,14 +22,12 @@ export default function AddItem() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [dbItems, setDbItems] = useState({})
 
-	    fetch('http://localhost:8080/items')
-	        .then(function(response) {
-               return response.json() 
-            })
-            .then(function(data) {
-                console.log(data)
-            })
 
+	fetch('http://localhost:8080/items')
+		.then(response => response.json())
+		.then(data => {
+		  console.log('Success:', data);
+	})
 
     const handleSubmit = (e) => {
         e.preventDefault();

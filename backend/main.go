@@ -93,7 +93,6 @@ func main() {
 			// handle this error
 			panic(err)
 		}
-		fmt.Println(id, task)
 		c.JSON(http.StatusOK, gin.H{id:task})
 	}
 	})
