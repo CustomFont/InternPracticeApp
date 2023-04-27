@@ -22,7 +22,9 @@ export default function AddItem() {
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
-    // grab tasks from database on render
+    // grab tasks from database on render & adds them to current toDoItems list
+    // refactor to only grab from db once submit pushes task to DB 
+    //      also add remove button
     useEffect(()=>{
         console.log('render useEffect')
         axios('http://localhost:8080/items')
