@@ -6,17 +6,17 @@
 module.exports = {
 
   development: {
-    client: "pg",
-    connection: "postgres://postgres:password@127.0.0.1:5432/tasks",
+    client: "postgres",
+    connection: "postgres://postgres:password@localhost:5432/tasks",
     migrations: {
       tableName: 'knex_migrations'
     }
   },
 
   staging: {
-    client: "pg",
+    client: "postgres",
     connection: {
-      host: "127.0.0,1",
+      host: "localhost",
       port: 5432,
       database: "tasks",
       user: "postgres",
@@ -34,7 +34,7 @@ module.exports = {
   production: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
+      database: 'my_db',  
       user:     'username',
       password: 'password'
     },

@@ -19,5 +19,5 @@
 - build go/ postgresql backend
     - setup go basic server 
     - import "fmt", "log", "net/http" and "github.com/gorilla/websocket"
-    - install knex to build database/ queries
+    - 
     - 

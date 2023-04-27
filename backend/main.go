@@ -1,17 +1,16 @@
 package main
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
-	"database/sql"
+
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	_ "github.com/lib/pq"
-	  "github.com/gin-contrib/cors"
-
 )
-
 
 type Task struct {
 	task      string
@@ -60,18 +59,12 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	reader(ws)
 }
 
-
-func database() {
-}
 func main() {
 	connectionStr := "user=postgres password=password dbname=tasks sslmode=disable"
 
 	r := gin.Default()
 	r.Use(cors.Default())
-	r.GET("/", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"data": "some basic data"})
-	})
-	
+
 	db, err := sql.Open("postgres", connectionStr)
 	if err != nil {
 		log.Fatal(err)
@@ -82,19 +75,20 @@ func main() {
 		panic(err)
 	}
 	defer rows.Close()
+	r.GET("/", getSomeData)
 	r.GET("/items", func(c *gin.Context) {
-	for rows.Next() {
-		var id string
-		var task string
-		var starttime string
-		var endtime string
-		err = rows.Scan(&id, &task, &starttime, &endtime)
-		if err != nil {
-			// handle this error
-			panic(err)
+		for rows.Next() {
+			var id string
+			var task string
+			var starttime string
+			var endtime string
+			err = rows.Scan(&id, &task, &starttime, &endtime)
+			if err != nil {
+				// handle this error
+				panic(err)
+			}
+			c.JSON(http.StatusOK, gin.H{id: task})
 		}
-		c.JSON(http.StatusOK, gin.H{id:task})
-	}
 	})
 	// get any error encountered during iteration
 	err = rows.Err()
@@ -102,8 +96,10 @@ func main() {
 		panic(err)
 	}
 
-
-
-	r.Run()
+	r.Run("localhost:8080")
 	fmt.Println("Listening on port 8080")
+}
+
+func getSomeData(c *gin.Context) {
+	c.JSON(http.StatusOK, gin.H{"data": "some basic data"})
 }

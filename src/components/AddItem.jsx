@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect} from 'react';
 import Modal from 'react-modal';
 import { ItemListContext } from '../App';
+import axios from 'axios';
 
 
 export default function AddItem() {
@@ -23,10 +24,11 @@ export default function AddItem() {
     const [dbItems, setDbItems] = useState({})
 
 
-	fetch('http://localhost:8080/items')
-		.then(response => response.json())
+	axios('http://localhost:8080/items')
+		.then(response => response.data)
 		.then(data => {
-		  console.log('Success:', data);
+            console.log(data)
+		    console.log('Success:', data);
 	})
 
     const handleSubmit = (e) => {
