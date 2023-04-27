@@ -1,32 +1,21 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
-	"log"
+	"net/http"
 
-	_ "github.com/lib/pq"
+	"github.com/gin-gonic/gin"
 )
 
-type Task struct {
-	task      string
-	starttime string
-	endtime   string
-}
+func (env Env) getItems(c *gin.Context) {
 
-func main() {
-	connectionStr := "user=postgres password=password dbname=tasks sslmode=disable"
-
-	db, err := sql.Open("postgres", connectionStr)
-	if err != nil {
-		log.Fatal(err)
-	}
-	rows, err := db.Query("SELECT id, task, starttime, endtime FROM tasklist LIMIT $1", 3)
+	rows, err := env.DB.Query("SELECT id, task, starttime, endtime FROM tasklist LIMIT $1", 3)
 	if err != nil {
 		// handle this error better than this
 		panic(err)
 	}
 	defer rows.Close()
+	a := make([]Task, 0)
 	for rows.Next() {
 		var id int
 		var task string
@@ -37,11 +26,14 @@ func main() {
 			// handle this error
 			panic(err)
 		}
-		fmt.Println(id, task)
+		a = append(a, NewTask(id, task, starttime, endtime))
 	}
+	fmt.Println(a)
 	// get any error encountered during iteration
 	err = rows.Err()
 	if err != nil {
 		panic(err)
 	}
+
+	c.IndentedJSON(http.StatusOK, a)
 }

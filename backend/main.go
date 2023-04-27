@@ -1,7 +1,6 @@
 package main
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -9,13 +8,23 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	_ "github.com/lib/pq"
 )
 
-type Task struct {
-	task      string
-	starttime string
-	endtime   string
+func main() {
+	// read methods from other files
+	env := new(Env)
+	var err error
+	env.DB, err = ConnectDB()
+	if err != nil {
+		log.Fatalf("failed to start the server: %v", err)
+	}
+
+	router := gin.Default()
+
+	router.Use(cors.Default())
+	router.GET("/items", env.getItems)
+	router.Run("localhost:8080")
+	fmt.Println("Listening on port 8080")
 }
 
 var upgrader = websocket.Upgrader{
@@ -57,49 +66,4 @@ func serveWs(w http.ResponseWriter, r *http.Request) {
 	// listen indefinitely for new messages coming
 	// through on our WebSocket connection
 	reader(ws)
-}
-
-func main() {
-	connectionStr := "user=postgres password=password dbname=tasks sslmode=disable"
-
-	r := gin.Default()
-	r.Use(cors.Default())
-
-	db, err := sql.Open("postgres", connectionStr)
-	if err != nil {
-		log.Fatal(err)
-	}
-	rows, err := db.Query("SELECT id, task, starttime, endtime FROM tasklist LIMIT $1", 3)
-	if err != nil {
-		// handle this error better than this
-		panic(err)
-	}
-	defer rows.Close()
-	r.GET("/", getSomeData)
-	r.GET("/items", func(c *gin.Context) {
-		for rows.Next() {
-			var id string
-			var task string
-			var starttime string
-			var endtime string
-			err = rows.Scan(&id, &task, &starttime, &endtime)
-			if err != nil {
-				// handle this error
-				panic(err)
-			}
-			c.JSON(http.StatusOK, gin.H{id: task})
-		}
-	})
-	// get any error encountered during iteration
-	err = rows.Err()
-	if err != nil {
-		panic(err)
-	}
-
-	r.Run("localhost:8080")
-	fmt.Println("Listening on port 8080")
-}
-
-func getSomeData(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{"data": "some basic data"})
 }

@@ -5,10 +5,8 @@ import './App.css';
 
 export const ItemListContext = createContext([])
 
-
 export default function App() {
     const [toDoItems, setToDoItems] = useState([])
-
 
     return (
         <>

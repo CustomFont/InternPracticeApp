@@ -21,15 +21,21 @@ export default function AddItem() {
     })
 
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [dbItems, setDbItems] = useState({})
 
-
-	axios('http://localhost:8080/items')
-		.then(response => response.data)
-		.then(data => {
-            console.log(data)
-		    console.log('Success:', data);
-	})
+    // grab tasks from database on render
+    useEffect(()=>{
+        console.log('render useEffect')
+        axios('http://localhost:8080/items')
+            .then(response => response.data)
+            .then(data => {
+                console.log('Success:', data);
+                for (let i = 0; i < data.length; i++) {
+                    let item = { "task": data[i].Task, "startTime": data[i].Starttime, "endTime": data[i].Endtime };
+                    setToDoItems(toDoItems => [...toDoItems, item])
+                }
+            }
+        )
+    },[])
 
     const handleSubmit = (e) => {
         e.preventDefault();
