@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"webpack-dev-server .\" \"docker-compose up -d\" \"cd backend && go run main.go\"",
+    "start": "concurrently \"webpack-dev-server .\" \"cd backend && go run .\"",
     "build": "webpack .",
     "test": "jest",
     "coverage": "jest --coverage"

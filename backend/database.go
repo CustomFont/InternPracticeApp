@@ -3,6 +3,8 @@ package main
 import (
 	"database/sql"
 	"log"
+
+	_ "github.com/lib/pq"
 )
 
 // Env holds database connection to Postgres

@@ -21,3 +21,9 @@
     - import "fmt", "log", "net/http" and "github.com/gorilla/websocket"
     - 
     - 
+
+# Usage
+
+- docker-compose up
+- npm start
+    (webpack-dev-server. && cd backend go run.)
