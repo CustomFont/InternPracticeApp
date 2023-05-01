@@ -26,6 +26,7 @@ func main() {
 	router.Use(cors.Default())
 	router.GET("/items", env.getItems)
 	router.POST("/addItem", env.postItem)
+	router.DELETE("/deleteItem/:id", env.deleteItem)
 	router.Run("localhost:8080")
 	fmt.Println("Listening on port 8080")
 }

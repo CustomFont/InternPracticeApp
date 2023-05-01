@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
 import { ItemListContext } from '../App';
+import DeleteButton from './DeleteButton';
 
 export default function ToDoTable() {
     const itemListContext = useContext(ItemListContext)
@@ -16,11 +17,12 @@ export default function ToDoTable() {
                 </tr>
                 {toDoItems.map(item => {
                     return(
-                        <tr key={toDoItems.indexOf(item)}>
-                            <td>{toDoItems.indexOf(item)}</td>
+                        <tr key={item.ID}>
+                            <td>{item.ID}</td>
                             <td>{item.task}</td>
                             <td>{item.startTime}</td>
                             <td>{item.endTime}</td>
+                            <td><DeleteButton id={item.ID}>x</DeleteButton></td>
                         </tr>
                     )
                 })}

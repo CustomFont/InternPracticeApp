@@ -9,7 +9,7 @@ import (
 
 func (env Env) getItems(c *gin.Context) {
 
-	rows, err := env.DB.Query("SELECT id, task, starttime, endtime FROM tasklist LIMIT $1", 3)
+	rows, err := env.DB.Query("SELECT id, task, starttime, endtime FROM tasklist")
 	if err != nil {
 		// handle this error better than this
 		panic(err)

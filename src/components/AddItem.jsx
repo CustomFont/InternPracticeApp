@@ -32,7 +32,7 @@ export default function AddItem() {
             .then(data => {
                 console.log('Success:', data);
                 for (let i = 0; i < data.length; i++) {
-                    let item = { "task": data[i].Task, "startTime": data[i].Starttime, "endTime": data[i].Endtime };
+                    let item = { "ID": data[i].ID, "task": data[i].Task, "startTime": data[i].Starttime, "endTime": data[i].Endtime };
                     setToDoItems(toDoItems => [...toDoItems, item])
                 }
             }
@@ -41,8 +41,19 @@ export default function AddItem() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setToDoItems([...toDoItems, item]);
+        axios.post('http://localhost:8080/addItem', {
+            "task": item.task,
+            "starttime": item.startTime,
+            "endtime": item.endTime,
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         setModalIsOpen(false);
+        window.location.reload();
     }
 
     return (
