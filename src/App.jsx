@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect} from "react";
+import React, {createContext, useState} from "react";
 import ToDoTable from "./components/ToDoTable";
 import AddItem from "./components/AddItem";
 import './App.css';

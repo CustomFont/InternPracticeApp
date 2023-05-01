@@ -1,6 +1,4 @@
-import React, {useState, useContext, useEffect} from 'react';
-import Modal from 'react-modal';
-import { ItemListContext } from '../App';
+import React from 'react';
 import axios from 'axios';
 
 export default function DeleteButton(props){
