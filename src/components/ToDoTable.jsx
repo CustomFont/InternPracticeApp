@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import { ItemListContext } from '../App';
 import DeleteButton from './DeleteButton';
+import UpdateButton from './UpdateButton';
 
 export default function ToDoTable() {
     const itemListContext = useContext(ItemListContext)
@@ -23,6 +24,7 @@ export default function ToDoTable() {
                             <td>{item.startTime}</td>
                             <td>{item.endTime}</td>
                             <td><DeleteButton id={item.ID}>x</DeleteButton></td>
+                            <td><UpdateButton id={item.ID}>Edit</UpdateButton></td>
                         </tr>
                     )
                 })}
