@@ -25,6 +25,7 @@ func main() {
 
 	router.Use(cors.Default())
 	router.GET("/items", env.getItems)
+	router.GET("/items/:id", env.getItemByID)
 	router.POST("/addItem", env.postItem)
 	router.DELETE("/deleteItem/:id", env.deleteItem)
 	router.PUT("/updateItem/:id", env.updateItem)

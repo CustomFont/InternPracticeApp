@@ -12,7 +12,7 @@ export default function AddItem() {
 
     // init & format placeholder dates
     const date = new Date()
-    const newDate = `${date.getFullYear()}-${date.getMonth()}-${date.getDay()}T${date.getHours()}:${date.getMinutes()}`
+    const newDate = `${date.getFullYear()}-${("0" + date.getMonth()).slice(-2)}-${("0" + date.getDay()).slice(-2)}T${date.getHours()}:${("0" + date.getMinutes()).slice(-2) }`
 
     const [item, setItem] = useState({
         "task": '',
