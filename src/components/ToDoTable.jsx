@@ -21,7 +21,7 @@ export default function ToDoTable() {
                 {toDoItems.map(item => {
                     return(
                         <tr key={item.ID}>
-                            <td>{toDoItems.indexOf(item)}</td>
+                            <td>{toDoItems.indexOf(item)-1}</td>
                             <td>{item.ID}</td>
                             <td>{item.task}</td>
                             <td>{item.startTime}</td>
