@@ -11,6 +11,7 @@ export default function ToDoTable() {
         <table>
             <tbody>
                 <tr>
+                    <th>Item No.</th>
                     <th>id</th>
                     <th>Task</th>
                     <th>Start Time</th>
@@ -20,6 +21,7 @@ export default function ToDoTable() {
                 {toDoItems.map(item => {
                     return(
                         <tr key={item.ID}>
+                            <td>{toDoItems.indexOf(item)}</td>
                             <td>{item.ID}</td>
                             <td>{item.task}</td>
                             <td>{item.startTime}</td>
