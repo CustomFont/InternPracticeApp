@@ -1,20 +1,13 @@
 import React, {useState, useContext, useEffect} from 'react';
-import { ItemListContext } from '../App';
 import Modal from 'react-modal';
 import axios from 'axios';
 
 export default function UpdateButton(props){
-    const itemListContext = useContext(ItemListContext)
-    const setToDoItems = itemListContext.setToDoItems;
-    const toDoItems = itemListContext.toDoItems;
     Modal.setAppElement(document.getElementById('root'))
     let id = props.id
-
-    const date = new Date()
-    const newDate = `${date.getFullYear()}-${("0" + date.getMonth()).slice(-2)}-${("0" + date.getDay()).slice(-2)}T${date.getHours()}:${("0" + date.getMinutes()).slice(-2) }`
-    
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const [currID, setCurrID] = useState(undefined);
-	const [item, setItem] = useState({
+    const [item, setItem] = useState({
         "Task": '',
         "Starttime": newDate,
         "Endtime": newDate
@@ -24,6 +17,10 @@ export default function UpdateButton(props){
         "Starttime": newDate,
         "Endtime": newDate
     }
+    
+    const date = new Date()
+    const newDate = `${date.getFullYear()}-${("0" + date.getMonth()).slice(-2)}-${("0" + date.getDay()).slice(-2)}T${date.getHours()}:${("0" + date.getMinutes()).slice(-2) }`
+    
     useEffect(()=>{
         if (currID != undefined){
             axios.get(`http://localhost:8080/items/${id}`)
@@ -48,8 +45,6 @@ export default function UpdateButton(props){
         setCurrID(undefined);
         window.location.reload();
     }
-
-    const [modalIsOpen, setModalIsOpen] = useState(false);
 
     const closeWithoutUpdate = () => {
         setCurrID(undefined)

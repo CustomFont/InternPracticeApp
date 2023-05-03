@@ -7,7 +7,6 @@ import axios from 'axios';
 export default function AddItem() {
     const itemListContext = useContext(ItemListContext)
     const setToDoItems = itemListContext.setToDoItems;
-    const toDoItems = itemListContext.toDoItems;
     Modal.setAppElement(document.getElementById('root'))
 
     // init & format placeholder dates
